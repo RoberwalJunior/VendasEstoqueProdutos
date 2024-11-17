@@ -21,4 +21,11 @@ public class EmpresasController(IEmpresaServiceApp empresaService) : ControllerB
         var empresaDto = _empresaService.RecuperarEmpresaPeloId(id);
         return empresaDto != null ? Ok(empresaDto) : NotFound();
     }
+
+    [HttpGet("{id}/Produtos")]
+    public IActionResult RecuperarListaDeProdutosDaEmpresa(int id)
+    {
+        var listaProdutosEmpresaDto = _empresaService.RecuperarListaDeProdutosDaEmpresa(id);
+        return listaProdutosEmpresaDto != null ? Ok(listaProdutosEmpresaDto) : NotFound();
+    }
 }

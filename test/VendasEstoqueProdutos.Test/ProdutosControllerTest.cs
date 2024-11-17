@@ -54,7 +54,7 @@ public class ProdutosControllerTest(VendasEstoqueProdutosApplicationFactory app)
     }
 
     [Fact]
-    public async Task POST_Retornar_Status_NoContent_Quando_Atualiza_Produto_Com_Exito()
+    public async Task PUT_Retornar_Status_NoContent_Quando_Atualiza_Produto_Com_Exito()
     {
         var produtoExitente = await _app.RecuperarProdutoExistente();
         var produtoDto = new UpdateProdutoDto()
@@ -72,7 +72,7 @@ public class ProdutosControllerTest(VendasEstoqueProdutosApplicationFactory app)
     }
 
     [Fact]
-    public async Task POST_Retornar_Status_NoContent_Quando_Deletar_Produto_Com_Exito()
+    public async Task DELETE_Retornar_Status_NoContent_Quando_Deletar_Produto_Com_Exito()
     {
         var produtoExitente = await _app.RecuperarProdutoExistente();
         using var client = _app.CreateClient();

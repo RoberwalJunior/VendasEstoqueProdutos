@@ -54,7 +54,7 @@ public class ModelosProdutoControllerTest(VendasEstoqueProdutosApplicationFactor
     }
 
     [Fact]
-    public async Task POST_Retornar_Status_NoContent_Quando_Atualiza_Modelo_Produto_Com_Exito()
+    public async Task PUT_Retornar_Status_NoContent_Quando_Atualiza_Modelo_Produto_Com_Exito()
     {
         var modeloProdutoExitente = await _app.RecuperarModeloProdutoExistente();
         var modeloProdutoDto = new UpdateModeloProdutoDto()
@@ -71,7 +71,7 @@ public class ModelosProdutoControllerTest(VendasEstoqueProdutosApplicationFactor
     }
 
     [Fact]
-    public async Task POST_Retornar_Status_NoContent_Quando_Deletar_Modelo_Produto_Com_Exito()
+    public async Task DELETE_Retornar_Status_NoContent_Quando_Deletar_Modelo_Produto_Com_Exito()
     {
         var modeloProdutoExitente = await _app.RecuperarModeloProdutoExistente();
         using var client = _app.CreateClient();

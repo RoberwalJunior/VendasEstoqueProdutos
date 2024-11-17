@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using VendasEstoqueProdutos.Shared.Application.AutoMapper.Dtos.Empresa;
+using VendasEstoqueProdutos.Shared.Application.AutoMapper.Dtos.Produto;
 using VendasEstoqueProdutos.Shared.Application.Interfaces;
 using VendasEstoqueProdutos.Shared.Domain.Interfaces.Services;
 
@@ -20,5 +21,11 @@ public class EmpresaServiceApp(IMapper mapper, IEmpresaService service) : IEmpre
     {
         var empresa = _service.GetModelById(id);
         return empresa != null ? _mapper.Map<ReadEmpresaDto>(empresa) : null;
+    }
+
+    public IEnumerable<ReadProdutoDto>? RecuperarListaDeProdutosDaEmpresa(int id)
+    {
+        var empresa = _service.GetModelById(id);
+        return empresa != null ? _mapper.Map<IEnumerable<ReadProdutoDto>>(empresa.Produtos) : null;
     }
 }

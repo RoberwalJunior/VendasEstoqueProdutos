@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
 using VendasEstoqueProdutos.Test.WebApplication;
 using VendasEstoqueProdutos.Shared.Application.AutoMapper.Dtos.Empresa;
+using VendasEstoqueProdutos.Shared.Application.AutoMapper.Dtos.Produto;
 
 namespace VendasEstoqueProdutos.Test;
 
@@ -29,5 +30,16 @@ public class EmpresasControllerTest(VendasEstoqueProdutosApplicationFactory app)
 
         Assert.NotNull(empresaExitente);
         Assert.Equal(empresaExitente.Nome, empresaDto!.Nome);
+    }
+
+    [Fact]
+    public async Task GET_RecuperarListaProdutosDaEmpresaCadastrados()
+    {
+        using var client = _app.CreateClient();
+        var empresaExitente = await _app.RecuperarEmpresaExistente();
+
+        var listaProdutosDaEmpresaDto = await client.GetFromJsonAsync<IEnumerable<ReadProdutoDto>>($"/api/empresas/{empresaExitente.Id}/produtos");
+
+        Assert.NotNull(listaProdutosDaEmpresaDto);
     }
 }
