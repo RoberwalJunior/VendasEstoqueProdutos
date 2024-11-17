@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using VendasEstoqueProdutos.Shared.Domain.Entities;
+using VendasEstoqueProdutos.Shared.Domain.Entities.Enums;
 using VendasEstoqueProdutos.Shared.Infrastructure.Data.Context;
 
 namespace VendasEstoqueProdutos.Test.WebApplication;
@@ -112,5 +113,35 @@ public class VendasEstoqueProdutosApplicationFactory : WebApplicationFactory<Pro
         }
 
         return clienteExistente;
+    }
+
+    public async Task<Venda> RecuperarVendaExistente()
+    {
+        var vendaExistente = await _context.Vendas
+            .Include(venda => venda.Empresa)
+            .Include(venda => venda.Itens)
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
+
+        if (vendaExistente == null)
+        {
+            var empresaExistente = await RecuperarEmpresaExistente();
+            var novaVenda = new Venda()
+            {
+                EmpresaId = empresaExistente.Id,
+                ValorTotal = 150,
+                DataDaCompra = DateTime.Now,
+                TipoPagamento = TipoPagamento.Debito,
+                StatusPagamento = StatusPagamento.Pago,
+                Itens = []
+            };
+
+            await _context.Vendas.AddAsync(novaVenda);
+            await _context.SaveChangesAsync();
+
+            vendaExistente = novaVenda;
+        }
+
+        return vendaExistente;
     }
 }
