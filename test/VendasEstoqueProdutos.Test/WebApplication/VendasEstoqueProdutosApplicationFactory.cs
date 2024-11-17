@@ -35,4 +35,57 @@ public class VendasEstoqueProdutosApplicationFactory : WebApplicationFactory<Pro
 
         return empresaExistente;
     }
+
+    public async Task<Produto> RecuperarProdutoExistente()
+    {
+        var produtoExistente = await _context.Produtos
+            .Include(produto => produto.Empresa)
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
+
+        if (produtoExistente == null)
+        {
+            var empresaExistente = await RecuperarEmpresaExistente();
+            var novoProduto = new Produto()
+            {
+                EmpresaId = empresaExistente.Id,
+                Codigo = 999,
+                Nome = "Teste de produto",
+                ValorUnitario = 100.99
+            };
+
+            await _context.Produtos.AddAsync(novoProduto);
+            await _context.SaveChangesAsync();
+
+            produtoExistente = novoProduto;
+        }
+
+        return produtoExistente;
+    }
+
+    public async Task<ModeloProduto> RecuperarModeloProdutoExistente()
+    {
+        var modeloProdutoExistente = await _context.ModeloProdutos
+            .Include(produto => produto.Produto)
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
+
+        if (modeloProdutoExistente == null)
+        {
+            var produtoExistente = await RecuperarProdutoExistente();
+            var novoModeloProduto = new ModeloProduto()
+            {
+                ProdutoId = produtoExistente.Id,
+                Descricao = "Teste modelo produto",
+                QuantidadeEstoque = 50
+            };
+
+            await _context.ModeloProdutos.AddAsync(novoModeloProduto);
+            await _context.SaveChangesAsync();
+
+            modeloProdutoExistente = novoModeloProduto;
+        }
+
+        return modeloProdutoExistente;
+    }
 }

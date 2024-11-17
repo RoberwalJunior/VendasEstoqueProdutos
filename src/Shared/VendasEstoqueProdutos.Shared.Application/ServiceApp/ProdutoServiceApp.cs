@@ -29,4 +29,17 @@ public class ProdutoServiceApp(IMapper mapper, IProdutoService service) : IProdu
         produto.Modelos = [new() { Descricao = "Padrão", QuantidadeEstoque = 0 }];
         return await _service.CreateModel(produto);
     }
+
+    public async Task<bool> AtualizarProduto(int id, UpdateProdutoDto produtoDto)
+    {
+        var produto = _service.GetModelById(id);
+        if (produto == null) return false;
+        _mapper.Map(produtoDto, produto);
+        return await _service.UpdateModel(produto);
+    }
+
+    public async Task<bool> DeletarProduto(int id)
+    {
+        return await _service.DeleteModel(id);
+    }
 }

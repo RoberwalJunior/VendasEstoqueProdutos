@@ -37,4 +37,16 @@ public class ProdutosController(IProdutoServiceApp produtoService, IModeloProdut
         var resultado = await _produtoService.CadastrarNovoProduto(produtoDto);
         return resultado ? Ok("Produto cadastrado com sucesso!") : StatusCode(500, new { Message = "Erro ao cadastrar novo produto." });
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> AtualizarProduto(int id, [FromBody] UpdateProdutoDto produtoDto)
+    {
+        return await _produtoService.AtualizarProduto(id, produtoDto) ? NoContent() : NotFound();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeletarProduto(int id)
+    {
+        return await _produtoService.DeletarProduto(id) ? NoContent() : NotFound();
+    }
 }
