@@ -32,6 +32,7 @@ builder.Services.AddTransient<IItemVendaService, ItemVendaService>();
 builder.Services.AddTransient<IEmpresaServiceApp, EmpresaServiceApp>();
 builder.Services.AddTransient<IProdutoServiceApp, ProdutoServiceApp>();
 builder.Services.AddTransient<IModeloProdutoServiceApp, ModeloProdutoServiceApp>();
+builder.Services.AddTransient<IClienteServiceApp, ClienteServiceApp>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

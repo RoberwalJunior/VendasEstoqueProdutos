@@ -88,4 +88,29 @@ public class VendasEstoqueProdutosApplicationFactory : WebApplicationFactory<Pro
 
         return modeloProdutoExistente;
     }
+
+    public async Task<Cliente> RecuperarClienteExistente()
+    {
+        var clienteExistente = await _context.Clientes
+            .Include(cliente => cliente.Empresa)
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
+
+        if (clienteExistente == null)
+        {
+            var empresaExistente = await RecuperarEmpresaExistente();
+            var novoCliente = new Cliente()
+            {
+                EmpresaId = empresaExistente.Id,
+                Nome = "Cliente teste"
+            };
+
+            await _context.Clientes.AddAsync(novoCliente);
+            await _context.SaveChangesAsync();
+
+            clienteExistente = novoCliente;
+        }
+
+        return clienteExistente;
+    }
 }
