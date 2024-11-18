@@ -9,5 +9,6 @@ public class EmpresaProfile : Profile
     public EmpresaProfile()
     {
         CreateMap<Empresa, ReadEmpresaDto>();
+        CreateMap<Empresa, ReadEmpresaCompletoDto>();
     }
 }

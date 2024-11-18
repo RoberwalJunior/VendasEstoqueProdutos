@@ -25,7 +25,21 @@ public class EmpresasController(IEmpresaServiceApp empresaService) : ControllerB
     [HttpGet("{id}/Produtos")]
     public IActionResult RecuperarListaDeProdutosDaEmpresa(int id)
     {
-        var listaProdutosEmpresaDto = _empresaService.RecuperarListaDeProdutosDaEmpresa(id);
-        return listaProdutosEmpresaDto != null ? Ok(listaProdutosEmpresaDto) : NotFound();
+        var empresaDto = _empresaService.RecuperarEmpresaPeloId(id);
+        return (empresaDto != null && empresaDto.Produtos != null) ? Ok(empresaDto.Produtos) : NotFound();
+    }
+
+    [HttpGet("{id}/Clientes")]
+    public IActionResult RecuperarListaDeClientesDaEmpresa(int id)
+    {
+        var empresaDto = _empresaService.RecuperarEmpresaPeloId(id);
+        return (empresaDto != null && empresaDto.Clientes != null) ? Ok(empresaDto.Clientes) : NotFound();
+    }
+
+    [HttpGet("{id}/Vendas")]
+    public IActionResult RecuperarListaDeVendasCadastradasDaEmpresa(int id)
+    {
+        var empresaDto = _empresaService.RecuperarEmpresaPeloId(id);
+        return (empresaDto != null && empresaDto.Vendas != null) ? Ok(empresaDto.Vendas) : NotFound();
     }
 }
