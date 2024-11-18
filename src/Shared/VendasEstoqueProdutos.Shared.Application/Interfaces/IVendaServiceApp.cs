@@ -5,5 +5,5 @@ namespace VendasEstoqueProdutos.Shared.Application.Interfaces;
 public interface IVendaServiceApp
 {
     public Task<IEnumerable<ReadVendaDto>> RecuperarListaDeVendasCadastradas();
-    public ReadVendaDto? RecuperarVendaPeloId(int id);
+    public ReadVendaCompletoDto? RecuperarVendaPeloId(int id);
 }

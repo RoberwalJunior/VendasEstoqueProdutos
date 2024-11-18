@@ -17,10 +17,10 @@ public class ClienteServiceApp(IMapper mapper, IClienteService clienteService) :
         return _mapper.Map<IEnumerable<ReadClienteDto>>(lista);
     }
 
-    public ReadClienteDto? RecuperarClientePeloId(int id)
+    public ReadClienteCompletoDto? RecuperarClientePeloId(int id)
     {
-        var empresa = _clienteService.GetModelById(id);
-        return empresa != null ? _mapper.Map<ReadClienteDto>(empresa) : null;
+        var cliente = _clienteService.GetModelById(id);
+        return cliente != null ? _mapper.Map<ReadClienteCompletoDto>(cliente) : null;
     }
 
     public async Task<bool> CadastrarNovoCliente(CreateClienteDto clienteDto)

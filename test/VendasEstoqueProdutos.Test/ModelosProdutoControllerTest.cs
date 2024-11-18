@@ -27,12 +27,13 @@ public class ModelosProdutoControllerTest(VendasEstoqueProdutosApplicationFactor
         using var client = _app.CreateClient();
         var modeloProdutoExitente = await _app.RecuperarModeloProdutoExistente();
 
-        var modeloProdutoDto = await client.GetFromJsonAsync<ReadModeloProdutoDto>($"{URL}{modeloProdutoExitente.Id}");
+        var modeloProdutoDto = await client.GetFromJsonAsync<ReadModeloProdutoCompletoDto>($"{URL}{modeloProdutoExitente.Id}");
 
-        Assert.NotNull(modeloProdutoExitente);
-        Assert.Equal(modeloProdutoExitente.Produto!.Id, modeloProdutoDto!.ProdutoId);
-        Assert.Equal(modeloProdutoExitente.Descricao, modeloProdutoDto!.Descricao);
-        Assert.Equal(modeloProdutoExitente.QuantidadeEstoque, modeloProdutoDto!.QuantidadeEstoque);
+        Assert.NotNull(modeloProdutoDto);
+        Assert.Equal(modeloProdutoExitente.Descricao, modeloProdutoDto.Descricao);
+        Assert.Equal(modeloProdutoExitente.QuantidadeEstoque, modeloProdutoDto.QuantidadeEstoque);
+        Assert.NotNull(modeloProdutoDto.Produto);
+        Assert.Equal(modeloProdutoExitente.Produto!.Nome, modeloProdutoDto.Produto.Nome);
     }
 
     [Fact]

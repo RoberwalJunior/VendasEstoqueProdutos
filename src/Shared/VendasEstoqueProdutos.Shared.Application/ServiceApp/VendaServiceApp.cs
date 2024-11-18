@@ -16,9 +16,9 @@ public class VendaServiceApp(IMapper mapper, IVendaService vendaService) : IVend
         return _mapper.Map<IEnumerable<ReadVendaDto>>(lista);
     }
 
-    public ReadVendaDto? RecuperarVendaPeloId(int id)
+    public ReadVendaCompletoDto? RecuperarVendaPeloId(int id)
     {
         var venda = _vendaService.GetModelById(id);
-        return venda != null ? _mapper.Map<ReadVendaDto>(venda) : null;
+        return venda != null ? _mapper.Map<ReadVendaCompletoDto>(venda) : null;
     }
 }

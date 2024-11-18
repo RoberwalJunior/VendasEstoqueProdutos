@@ -26,12 +26,15 @@ public class ProdutosControllerTest(VendasEstoqueProdutosApplicationFactory app)
         using var client = _app.CreateClient();
         var produtoExitente = await _app.RecuperarProdutoExistente();
 
-        var produtoDto = await client.GetFromJsonAsync<ReadProdutoDto>($"/api/produtos/{produtoExitente.Id}");
+        var produtoDto = await client.GetFromJsonAsync<ReadProdutoCompletoDto>($"/api/produtos/{produtoExitente.Id}");
 
-        Assert.NotNull(produtoExitente);
-        Assert.Equal(produtoExitente.Empresa!.Id, produtoDto!.EmpresaId);
-        Assert.Equal(produtoExitente.Codigo, produtoDto!.Codigo);
-        Assert.Equal(produtoExitente.Nome, produtoDto!.Nome);
+        Assert.NotNull(produtoDto);
+        Assert.Equal(produtoExitente.Codigo, produtoDto.Codigo);
+        Assert.Equal(produtoExitente.Nome, produtoDto.Nome);
+        Assert.Equal(produtoExitente.ValorUnitario, produtoDto.ValorUnitario);
+        Assert.NotNull(produtoDto.Modelos);
+        Assert.NotNull(produtoDto.Empresa);
+        Assert.Equal(produtoExitente.Empresa!.Nome, produtoDto.Empresa.Nome);
     }
 
     [Fact]

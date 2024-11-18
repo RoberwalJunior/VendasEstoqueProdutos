@@ -17,10 +17,10 @@ public class ProdutoServiceApp(IMapper mapper, IProdutoService service) : IProdu
         return _mapper.Map<IEnumerable<ReadProdutoDto>>(produtos);
     }
 
-    public ReadProdutoDto? RecuperarProdutoPeloId(int id)
+    public ReadProdutoCompletoDto? RecuperarProdutoPeloId(int id)
     {
         var produto = _service.GetModelById(id);
-        return produto != null ? _mapper.Map<ReadProdutoDto>(produto) : null;
+        return produto != null ? _mapper.Map<ReadProdutoCompletoDto>(produto) : null;
     }
 
     public async Task<bool> CadastrarNovoProduto(CreateProdutoDto produtoDto)

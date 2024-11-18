@@ -30,10 +30,13 @@ public class EmpresasControllerTest(VendasEstoqueProdutosApplicationFactory app)
 
         var empresaDto = await client.GetFromJsonAsync<ReadEmpresaCompletoDto>($"/api/empresas/{empresaExitente.Id}");
 
-        Assert.NotNull(empresaExitente);
-        Assert.Equal(empresaExitente.Nome, empresaDto!.Nome);
-        Assert.Equal(empresaExitente.RazaoSocial, empresaDto!.RazaoSocial);
-        Assert.Equal(empresaExitente.Cnpj, empresaDto!.Cnpj);
+        Assert.NotNull(empresaDto);
+        Assert.Equal(empresaExitente.Nome, empresaDto.Nome);
+        Assert.Equal(empresaExitente.RazaoSocial, empresaDto.RazaoSocial);
+        Assert.Equal(empresaExitente.Cnpj, empresaDto.Cnpj);
+        Assert.NotNull(empresaDto.Clientes);
+        Assert.NotNull(empresaDto.Produtos);
+        Assert.NotNull(empresaDto.Vendas);
     }
 
     [Fact]

@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
-using VendasEstoqueProdutos.Shared.Application.AutoMapper.Dtos.Venda;
 using VendasEstoqueProdutos.Test.WebApplication;
+using VendasEstoqueProdutos.Shared.Application.AutoMapper.Dtos.Venda;
 
 namespace VendasEstoqueProdutos.Test;
 
@@ -25,11 +25,13 @@ public class VendasControllerTest(VendasEstoqueProdutosApplicationFactory app)
         using var client = _app.CreateClient();
         var vendaExitente = await _app.RecuperarVendaExistente();
 
-        var vendaDto = await client.GetFromJsonAsync<ReadVendaDto>($"/api/vendas/{vendaExitente.Id}");
+        var vendaDto = await client.GetFromJsonAsync<ReadVendaCompletoDto>($"/api/vendas/{vendaExitente.Id}");
 
-        Assert.NotNull(vendaExitente);
-        Assert.Equal(vendaExitente.Empresa!.Id, vendaDto!.EmpresaId);
-        Assert.Equal(vendaExitente.ValorTotal, vendaDto!.ValorTotal);
-        Assert.Equal(vendaExitente.DataDaCompra, vendaDto!.DataDaCompra);
+        Assert.NotNull(vendaDto);
+        Assert.Equal(vendaExitente.ValorTotal, vendaDto.ValorTotal);
+        Assert.Equal(vendaExitente.DataDaCompra, vendaDto.DataDaCompra);
+        Assert.NotNull(vendaDto.Empresa);
+        Assert.Equal(vendaExitente.Empresa!.Nome, vendaDto.Empresa.Nome);
+        Assert.NotNull(vendaDto.Itens);
     }
 }

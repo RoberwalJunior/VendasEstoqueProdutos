@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
-using VendasEstoqueProdutos.Shared.Application.AutoMapper.Dtos.Cliente;
 using VendasEstoqueProdutos.Test.WebApplication;
+using VendasEstoqueProdutos.Shared.Application.AutoMapper.Dtos.Cliente;
 
 namespace VendasEstoqueProdutos.Test;
 
@@ -25,10 +25,13 @@ public class ClientesControllerTest(VendasEstoqueProdutosApplicationFactory app)
         using var client = _app.CreateClient();
         var clienteExistente = await _app.RecuperarClienteExistente();
 
-        var clienteDto = await client.GetFromJsonAsync<ReadClienteDto>($"/api/clientes/{clienteExistente.Id}");
+        var clienteDto = await client.GetFromJsonAsync<ReadClienteCompletoDto>($"/api/clientes/{clienteExistente.Id}");
 
-        Assert.NotNull(clienteExistente);
-        Assert.Equal(clienteExistente.Empresa!.Id, clienteDto!.EmpresaId);
-        Assert.Equal(clienteExistente.Nome, clienteDto!.Nome);
+        Assert.NotNull(clienteDto);
+        Assert.Equal(clienteExistente.Nome, clienteDto.Nome);
+        Assert.Equal(clienteExistente.RazaoSocial, clienteDto.RazaoSocial);
+        Assert.Equal(clienteExistente.Cnpj, clienteDto.Cnpj);
+        Assert.NotNull(clienteDto.Empresa);
+        Assert.Equal(clienteExistente.Empresa!.Nome, clienteDto!.Empresa.Nome);
     }
 }
