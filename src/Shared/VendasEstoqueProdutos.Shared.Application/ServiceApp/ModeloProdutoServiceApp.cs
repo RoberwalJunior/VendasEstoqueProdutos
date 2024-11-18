@@ -17,12 +17,6 @@ public class ModeloProdutoServiceApp(IMapper mapper, IModeloProdutoService model
         return _mapper.Map<IEnumerable<ReadModeloProdutoDto>>(listaModelosProduto);
     }
 
-    public async Task<IEnumerable<ReadModeloProdutoDto>> RecuperarListaDeModelosDoProduto(int produtoId)
-    {
-        var listaModelosProduto = await _modeloProdutoService.GetAllModelosProduto(produtoId);
-        return _mapper.Map<IEnumerable<ReadModeloProdutoDto>>(listaModelosProduto);
-    }
-
     public ReadModeloProdutoCompletoDto? RecuperarModeloProdutoPeloId(int id)
     {
         var modeloProduto = _modeloProdutoService.GetModelById(id);

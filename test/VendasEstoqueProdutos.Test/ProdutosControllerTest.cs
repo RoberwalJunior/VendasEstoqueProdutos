@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using VendasEstoqueProdutos.Shared.Application.AutoMapper.Dtos.ModeloProduto;
 using VendasEstoqueProdutos.Shared.Application.AutoMapper.Dtos.Produto;
 using VendasEstoqueProdutos.Test.WebApplication;
 
@@ -35,6 +36,17 @@ public class ProdutosControllerTest(VendasEstoqueProdutosApplicationFactory app)
         Assert.NotNull(produtoDto.Modelos);
         Assert.NotNull(produtoDto.Empresa);
         Assert.Equal(produtoExitente.Empresa!.Nome, produtoDto.Empresa.Nome);
+    }
+
+    [Fact]
+    public async Task GET_RecuperarListaDeModelosDoProduto()
+    {
+        using var client = _app.CreateClient();
+        var produtoExitente = await _app.RecuperarProdutoExistente();
+
+        var listaModeloProdutoDto = await client.GetFromJsonAsync<IEnumerable<ReadModeloProdutoDto>>($"/api/produtos/{produtoExitente.Id}/modelos");
+
+        Assert.NotNull(listaModeloProdutoDto);
     }
 
     [Fact]

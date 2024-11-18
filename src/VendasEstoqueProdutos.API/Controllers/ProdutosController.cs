@@ -6,10 +6,9 @@ namespace VendasEstoqueProdutos.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProdutosController(IProdutoServiceApp produtoService, IModeloProdutoServiceApp modeloProdutoService) : ControllerBase
+public class ProdutosController(IProdutoServiceApp produtoService) : ControllerBase
 {
     private readonly IProdutoServiceApp _produtoService = produtoService;
-    private readonly IModeloProdutoServiceApp _modeloProdutoService = modeloProdutoService;
 
     [HttpGet]
     public async Task<IActionResult> RecuperarListaDeProdutosCadastrados()
@@ -25,10 +24,10 @@ public class ProdutosController(IProdutoServiceApp produtoService, IModeloProdut
     }
 
     [HttpGet("{id}/Modelos")]
-    public async Task<IActionResult> RecuperarListaDeModelosDoProduto(int id)
+    public IActionResult RecuperarListaDeModelosDoProduto(int id)
     {
-        if (_produtoService.RecuperarProdutoPeloId(id) == null) return NotFound("Produto não encontrado!");
-        return Ok(await _modeloProdutoService.RecuperarListaDeModelosDoProduto(id));
+        var produto = _produtoService.RecuperarProdutoPeloId(id);
+        return (produto != null && produto.Modelos != null) ? Ok(produto.Modelos) : NotFound("Produto não encontrado!");
     }
 
     [HttpPost]
