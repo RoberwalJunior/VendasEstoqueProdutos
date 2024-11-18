@@ -16,4 +16,6 @@ public class ModeloProduto
 
     [Required]
     public int QuantidadeEstoque { get; set; }
+
+    public virtual ICollection<ItemVenda>? Itens { get; set; }
 }

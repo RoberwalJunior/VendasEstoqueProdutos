@@ -1,6 +1,4 @@
-﻿using VendasEstoqueProdutos.Shared.Application.AutoMapper.Dtos.ItemVenda;
-
-namespace VendasEstoqueProdutos.Shared.Application.AutoMapper.Dtos.Venda;
+﻿namespace VendasEstoqueProdutos.Shared.Application.AutoMapper.Dtos.Venda;
 
 public class ReadVendaDto
 {
@@ -11,5 +9,4 @@ public class ReadVendaDto
     public DateTime DataDaCompra { get; set; }
     public int TipoPagamento { get; set; }
     public int StatusPagamento { get; set; }
-    public ICollection<ReadItemVendaDto>? Itens { get; set; }
 }

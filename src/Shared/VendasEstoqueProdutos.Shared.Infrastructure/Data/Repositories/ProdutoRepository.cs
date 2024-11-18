@@ -15,6 +15,6 @@ public class ProdutoRepository(AppDbContext context)
             .Include(produto => produto.Empresa)
             .Include(produto => produto.Modelos)
             .AsNoTracking()
-            .FirstOrDefault();
+            .FirstOrDefault(produto => produto.Id == id);
     }
 }

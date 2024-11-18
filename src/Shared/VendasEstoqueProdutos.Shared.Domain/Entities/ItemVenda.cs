@@ -11,10 +11,8 @@ public class ItemVenda
     public virtual Venda? Venda { get; set; }
 
     [Required]
-    public int ProdutoId { get; set; }
-
-    [Required]
     public int ModeloProdutoId { get; set; }
+    public virtual ModeloProduto? ModeloProduto { get; set; }
 
     [Required]
     public int Quantidade { get; set; }

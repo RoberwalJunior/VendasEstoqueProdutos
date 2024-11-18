@@ -11,7 +11,8 @@ public class Venda
     public int EmpresaId { get; set; }
     public virtual Empresa? Empresa { get; set; }
 
-    public int ClienteId { get; set; }
+    public int? ClienteId { get; set; }
+    public virtual Cliente? Cliente { get; set; }
 
     [Required]
     public double ValorTotal { get; set; }
