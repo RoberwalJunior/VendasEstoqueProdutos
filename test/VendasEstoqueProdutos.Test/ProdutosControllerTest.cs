@@ -44,7 +44,7 @@ public class ProdutosControllerTest(VendasEstoqueProdutosApplicationFactory app)
         using var client = _app.CreateClient();
         var produtoExitente = await _app.RecuperarProdutoExistente();
 
-        var listaModeloProdutoDto = await client.GetFromJsonAsync<IEnumerable<ReadModeloProdutoDto>>($"/api/produtos/{produtoExitente.Id}/modelos");
+        var listaModeloProdutoDto = await client.GetFromJsonAsync<IEnumerable<ReadModeloDoProdutoDto>>($"/api/produtos/{produtoExitente.Id}/modelos");
 
         Assert.NotNull(listaModeloProdutoDto);
     }

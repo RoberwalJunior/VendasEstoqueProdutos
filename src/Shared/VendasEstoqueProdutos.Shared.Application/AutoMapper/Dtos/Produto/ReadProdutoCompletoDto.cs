@@ -9,5 +9,5 @@ public class ReadProdutoCompletoDto
     public string? Nome { get; set; }
     public double ValorUnitario { get; set; }
     public ReadEmpresaDto? Empresa { get; set; }
-    public ICollection<ReadModeloProdutoDto>? Modelos { get; set; }
+    public ICollection<ReadModeloDoProdutoDto>? Modelos { get; set; }
 }

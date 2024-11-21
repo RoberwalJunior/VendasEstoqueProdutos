@@ -11,6 +11,7 @@ public class ProdutoProfile : Profile
         CreateMap<CreateProdutoDto, Produto>();
         CreateMap<Produto, ReadProdutoDto>();
         CreateMap<Produto, ReadProdutoCompletoDto>();
+        CreateMap<Produto, ReadProdutoEmpresaDto>();
         CreateMap<UpdateProdutoDto, Produto>();
     }
 }

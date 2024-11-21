@@ -11,6 +11,7 @@ public class ModeloProdutoProfile : Profile
         CreateMap<CreateModeloProdutoDto, ModeloProduto>();
         CreateMap<ModeloProduto, ReadModeloProdutoDto>();
         CreateMap<ModeloProduto, ReadModeloProdutoCompletoDto>();
+        CreateMap<ModeloProduto, ReadModeloDoProdutoDto>();
         CreateMap<UpdateModeloProdutoDto, ModeloProduto>();
     }
 }

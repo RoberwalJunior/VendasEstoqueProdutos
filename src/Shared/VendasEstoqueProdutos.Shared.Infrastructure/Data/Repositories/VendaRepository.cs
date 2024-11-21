@@ -13,6 +13,7 @@ public class VendaRepository(AppDbContext context)
     {
         return _context.Vendas
             .Include(venda => venda.Empresa)
+            .Include(venda => venda.Cliente)
             .Include(venda => venda.Itens)
             .AsNoTracking()
             .FirstOrDefault(venda => venda.Id == id);

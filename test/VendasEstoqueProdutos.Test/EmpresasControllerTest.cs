@@ -45,7 +45,7 @@ public class EmpresasControllerTest(VendasEstoqueProdutosApplicationFactory app)
         using var client = _app.CreateClient();
         var empresaExitente = await _app.RecuperarEmpresaExistente();
 
-        var listaProdutosDaEmpresaDto = await client.GetFromJsonAsync<IEnumerable<ReadProdutoDto>>($"/api/empresas/{empresaExitente.Id}/produtos");
+        var listaProdutosDaEmpresaDto = await client.GetFromJsonAsync<IEnumerable<ReadProdutoEmpresaDto>>($"/api/empresas/{empresaExitente.Id}/produtos");
 
         Assert.NotNull(listaProdutosDaEmpresaDto);
     }
@@ -56,7 +56,7 @@ public class EmpresasControllerTest(VendasEstoqueProdutosApplicationFactory app)
         using var client = _app.CreateClient();
         var empresaExitente = await _app.RecuperarEmpresaExistente();
 
-        var listaClientesDaEmpresaDto = await client.GetFromJsonAsync<IEnumerable<ReadClienteDto>>($"/api/empresas/{empresaExitente.Id}/clientes");
+        var listaClientesDaEmpresaDto = await client.GetFromJsonAsync<IEnumerable<ReadClienteEmpresaDto>>($"/api/empresas/{empresaExitente.Id}/clientes");
 
         Assert.NotNull(listaClientesDaEmpresaDto);
     }
@@ -67,7 +67,7 @@ public class EmpresasControllerTest(VendasEstoqueProdutosApplicationFactory app)
         using var client = _app.CreateClient();
         var empresaExitente = await _app.RecuperarEmpresaExistente();
 
-        var listaVendasDaEmpresaDto = await client.GetFromJsonAsync<IEnumerable<ReadVendaDto>>($"/api/empresas/{empresaExitente.Id}/vendas");
+        var listaVendasDaEmpresaDto = await client.GetFromJsonAsync<IEnumerable<ReadVendaEmpresaDto>>($"/api/empresas/{empresaExitente.Id}/vendas");
 
         Assert.NotNull(listaVendasDaEmpresaDto);
     }

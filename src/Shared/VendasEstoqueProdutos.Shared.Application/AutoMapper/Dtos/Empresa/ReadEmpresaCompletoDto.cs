@@ -9,7 +9,7 @@ public class ReadEmpresaCompletoDto
     public string? Nome { get; set; }
     public string? RazaoSocial { get; set; }
     public string? Cnpj { get; set; }
-    public ICollection<ReadClienteDto>? Clientes { get; set; }
-    public ICollection<ReadProdutoDto>? Produtos { get; set; }
-    public ICollection<ReadVendaDto>? Vendas { get; set; }
+    public ICollection<ReadClienteEmpresaDto>? Clientes { get; set; }
+    public ICollection<ReadProdutoEmpresaDto>? Produtos { get; set; }
+    public ICollection<ReadVendaEmpresaDto>? Vendas { get; set; }
 }

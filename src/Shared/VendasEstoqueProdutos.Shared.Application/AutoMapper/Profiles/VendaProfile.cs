@@ -9,6 +9,7 @@ public class VendaProfile : Profile
     public VendaProfile()
     {
         CreateMap<Venda, ReadVendaDto>();
+        CreateMap<Venda, ReadVendaEmpresaDto>();
         CreateMap<Venda, ReadVendaCompletoDto>()
             .ForMember(vendaDto => vendaDto.TipoPagamento,
                 opt => opt.MapFrom(venda => venda.TipoPagamento.ToString()))
