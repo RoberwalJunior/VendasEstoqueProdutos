@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using VendasEstoqueProdutos.Shared.Application.Interfaces;
 
 namespace VendasEstoqueProdutos.API.Controllers;
 
 [ApiController]
+[Authorize(AuthenticationSchemes = "Bearer")]
 [Route("api/[controller]")]
 public class EmpresasController(IEmpresaServiceApp empresaService) : ControllerBase
 {
